@@ -8,14 +8,6 @@ class CheckoutTest extends FunSuite {
     assert (new Checkout(new ItemRepository).priceItems(List()) == 0)
   }
 
-  test("price one item") {
-    assert (new Checkout(new ItemRepository).priceItems(List("Apple")) == 0.60)
-  }
-
-  test("price multiple items of the same type") {
-    assert (new Checkout(new ItemRepository).priceItems(List("Apple", "Apple")) == 1.2)
-  }
-
   test("price multiple items of different types") {
     assert (new Checkout(new ItemRepository).priceItems(List("Apple", "Orange")) == 0.85)
   }
@@ -24,4 +16,19 @@ class CheckoutTest extends FunSuite {
     assert (new Checkout(new ItemRepository).priceItems(List("does not exist")) == 0.0)
   }
 
+  test("price one Apple") {
+    assert (new Checkout(new ItemRepository).priceItems(List("Apple")) == 0.60)
+  }
+
+  test("price apples at 2 for the price of 1") {
+    assert (new Checkout(new ItemRepository).priceItems(List("Apple", "Apple")) == 0.6)
+  }
+
+  test("price apples at 2 for the price of 1 plus an extra Apple at normal price") {
+    assert (new Checkout(new ItemRepository).priceItems(List("Apple", "Apple", "Apple")) == 1.2)
+  }
+
+  test("price apples at 4 for the price of 2") {
+    assert (new Checkout(new ItemRepository).priceItems(List("Apple", "Apple", "Apple", "Apple")) == 1.2)
+  }
 }
