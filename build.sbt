@@ -1,4 +1,4 @@
-name := "checkout"
+name := "checkout-bogof"
 
 version := "1.0"
 
